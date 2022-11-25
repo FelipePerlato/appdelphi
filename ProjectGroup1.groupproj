@@ -1,0 +1,48 @@
+﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+    <PropertyGroup>
+        <ProjectGuid>{CC6A97D3-64D6-46E6-845E-EDBB8D2E2D84}</ProjectGuid>
+    </PropertyGroup>
+    <ItemGroup>
+        <Projects Include="Itinerario.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="..\..\99money\money.dproj">
+            <Dependencies/>
+        </Projects>
+    </ItemGroup>
+    <ProjectExtensions>
+        <Borland.Personality>Default.Personality.12</Borland.Personality>
+        <Borland.ProjectType/>
+        <BorlandProject>
+            <Default.Personality/>
+        </BorlandProject>
+    </ProjectExtensions>
+    <Target Name="Itinerario">
+        <MSBuild Projects="Itinerario.dproj"/>
+    </Target>
+    <Target Name="Itinerario:Clean">
+        <MSBuild Projects="Itinerario.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="Itinerario:Make">
+        <MSBuild Projects="Itinerario.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="money">
+        <MSBuild Projects="..\..\99money\money.dproj"/>
+    </Target>
+    <Target Name="money:Clean">
+        <MSBuild Projects="..\..\99money\money.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="money:Make">
+        <MSBuild Projects="..\..\99money\money.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="Build">
+        <CallTarget Targets="Itinerario;money"/>
+    </Target>
+    <Target Name="Clean">
+        <CallTarget Targets="Itinerario:Clean;money:Clean"/>
+    </Target>
+    <Target Name="Make">
+        <CallTarget Targets="Itinerario:Make;money:Make"/>
+    </Target>
+    <Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
+</Project>
